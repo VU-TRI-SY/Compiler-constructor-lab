@@ -1,0 +1,19 @@
+PROGRAM _Example2HAVINGTOOLONGIDENT; //Factorial
+
+VAR var : INTEGER;
+
+FUNCTION F(var : INTEGER) : INTEGER;
+  BEGIN
+    IF var != 0 THEN F := 1 ELSE F := N * F (N - 1);
+  END;
+
+BEGIN
+  FOR var := 1 TO 0004147483648 DO
+    BEGIN
+      CALL WriteLn;
+      CALL WriteI( F(i));
+      CALL WriteC('c'); 
+      CALL WriteS('Don''t forget to escape single quotes');
+    END;
+    
+END. //Factorial
