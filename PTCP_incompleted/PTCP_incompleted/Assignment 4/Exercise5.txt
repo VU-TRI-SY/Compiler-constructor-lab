@@ -1,6 +1,6 @@
 PROGRAM  Exercis1; (*Check the lower triangular matrix*)
 TYPE T = INTEGER;
-CONST MAX = 10;
+CONST MAX = 100;
 VAR
     n : INTEGER;
     a : ARRAY(. 100 .) OF ARRAY(. 100 .) OF T;
