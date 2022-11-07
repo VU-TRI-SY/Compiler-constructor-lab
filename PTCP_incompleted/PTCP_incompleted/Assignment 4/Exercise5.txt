@@ -1,5 +1,6 @@
 PROGRAM  Exercis1; (*Check the lower triangular matrix*)
 TYPE T = INTEGER;
+CONST MAX = 10;
 VAR
     n : INTEGER;
     a : ARRAY(. 100 .) OF ARRAY(. 100 .) OF T;
@@ -7,16 +8,19 @@ VAR
     j : INTEGER;
     flag : INTEGER;
 BEGIN
-    flag := 1;
     n := READI;
-    FOR i := 1 TO n DO
-        FOR j := 1 TO n DO
-            a(.i.)(.j.) := READI;
+    IF n <= MAX THEN
+        BEGIN
+            flag := 1;
+            FOR i := 1 TO n DO
+                FOR j := 1 TO n DO
+                    a(.i.)(.j.) := READI;
 
-    FOR i := 1 TO n DO
-        FOR j := 1 TO n DO
-            IF i < j THEN
-                IF a(.i.)(.j.) <> 0 THEN
-                    flag := 0;
-    CALL WRITEI(flag);
+            FOR i := 1 TO n DO
+                FOR j := 1 TO n DO
+                    IF i < j THEN
+                        IF a(.i.)(.j.) <> 0 THEN
+                            flag := 0;
+            CALL WRITEI(flag);
+        END;
 END.
