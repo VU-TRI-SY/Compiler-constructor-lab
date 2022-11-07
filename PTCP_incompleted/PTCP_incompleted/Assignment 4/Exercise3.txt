@@ -1,0 +1,21 @@
+PROGRAM Exercis3;
+VAR 
+    a : ARRAY (. 10 .) OF INTEGER;
+    n : INTEGER;
+    temp : INTEGER;
+    i : INTEGER;
+    count : INTEGER;
+BEGIN
+    count := 0;
+    n := READI;
+    IF n <= 10 THEN
+        BEGIN
+            FOR i := 1 TO n DO
+                a(.i.) := READI;
+            temp := a(.1.);
+            FOR i := 2 TO n DO
+                IF a(.i.) < temp THEN
+                    count := count + 1;
+        END;
+    CALL WRITEI(count);
+END.
