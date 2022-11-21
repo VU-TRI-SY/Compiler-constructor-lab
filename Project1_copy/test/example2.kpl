@@ -18,5 +18,6 @@ Begin
       Call WriteLn;
       Call WriteI( F(i));
       CALL WRITEC('');
+      CALL WRITES("Hello World!");
     End;
 End. (* Factorial *

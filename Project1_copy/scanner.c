@@ -155,6 +155,41 @@ Token* readConstChar(void) {
   }
   return token;
 }
+Token* readConstantString(){
+  Token* token = makeToken(TK_NONE, lineNo, colNo);
+  int ln = lineNo;
+  int cn = colNo;
+  char string[MAX_STRING_LEN + 1];
+  int i = 0;
+  int closed = 0;
+  while(currentChar != EOF){
+    readChar();
+    if(charCodes[currentChar] == CHAR_DOUBLEQUOTE){
+      closed = 1;
+      break;
+    }else{
+      if(i < MAX_STRING_LEN)
+        string[i] = currentChar;
+    }
+    i++;
+  }
+  string[i] = '\0';
+
+  if(i > MAX_STRING_LEN){
+    error(ERR_STRINGTOOLONG, ln, cn);
+    return token;
+  }else{
+    if(closed){
+      token->tokenType = TK_STRING;
+      strcpy(token->string, string);
+      readChar();
+      return token;
+    }else{
+      error(ERR_ENDOFSTRING, ln, cn);
+      return token;
+    }
+  }
+}
 
 Token* getToken(void) {
   Token *token;
@@ -312,6 +347,8 @@ Token* getToken(void) {
       token = makeToken(SB_MODULO, lineNo, colNo);
       readChar();
       return token;
+    case CHAR_DOUBLEQUOTE:
+      return readConstantString();
     default:
       token = makeToken(TK_NONE, lineNo, colNo);
       error(ERR_INVALIDSYMBOL, lineNo, colNo);
@@ -333,6 +370,7 @@ void printToken(Token *token) {
   case TK_NUMBER: printf("TK_NUMBER(%s)\n", token->string); break;
   case TK_CHAR: printf("TK_CHAR(\'%s\')\n", token->string); break;
   case TK_EOF: printf("TK_EOF\n"); break;
+  case TK_STRING: printf("TK_STRING(\"%s\")\n", token->string); break;
 
   case KW_PROGRAM: printf("KW_PROGRAM\n"); break;
   case KW_CONST: printf("KW_CONST\n"); break;
