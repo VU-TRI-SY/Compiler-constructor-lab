@@ -1,0 +1,22 @@
+Program Example2HavingERRIDENTTOOLONG; (* Factorial *)
+!
+Var n : Integer;
+
+Function F(n : Integer) : Integer;
+  Begin
+    If n = 0 Then F := 1 Else F := N * F (N - 1);
+  End;
+
+Begin
+  n += 2;
+  n -= 2;
+  n *= 2;
+  n /= 2;
+  n = n % 2;
+  For n := 1 To 003147483648 Do
+    Begin
+      Call WriteLn;
+      Call WriteI( F(i));
+      CALL WRITEC('');
+    End;
+End. (* Factorial *
