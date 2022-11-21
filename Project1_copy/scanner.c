@@ -172,42 +172,50 @@ Token* getToken(void) {
   case CHAR_DIGIT: 
     return readNumber();
   case CHAR_PLUS: 
+    ln = lineNo;
+    cn = colNo;
     readChar();
     if(charCodes[currentChar] == CHAR_EQ){
       readChar();
-      return makeToken(SB_ASSIGN_PLUS, lineNo, colNo);
+      return makeToken(SB_ASSIGN_PLUS, ln, cn);
     }else{
-      token = makeToken(SB_PLUS, lineNo, colNo);
+      token = makeToken(SB_PLUS, ln, cn);
     }
     return token;
   case CHAR_MINUS:
+    ln = lineNo;
+    cn = colNo;
     readChar();
     if(charCodes[currentChar] == CHAR_EQ){
       readChar();
-      return makeToken(SB_ASSIGN_SUBTRACT, lineNo, colNo);
+      return makeToken(SB_ASSIGN_SUBTRACT, ln, cn);
     }
     else{
-      token = makeToken(SB_MINUS, lineNo, colNo);
+      token = makeToken(SB_MINUS, ln, cn);
     }
     return token;
   case CHAR_TIMES:
+    ln = lineNo;
+    cn = colNo;
     readChar();
     if(charCodes[currentChar] == CHAR_EQ){
       readChar();
-      return makeToken(SB_ASSIGN_TIME, lineNo, colNo);
+      return makeToken(SB_ASSIGN_TIME, ln, cn);
     }
     else{
-      token = makeToken(SB_TIMES, lineNo, colNo);
+      token = makeToken(SB_TIMES, ln, cn);
     }
     return token;
   case CHAR_SLASH: 
+    ln = lineNo;
+    cn = colNo;
     readChar();
     if(charCodes[currentChar] == CHAR_EQ){
       readChar();
-      return makeToken(SB_ASSIGN_DIVIDE, lineNo, colNo);
+      return makeToken(SB_ASSIGN_DIVIDE, ln, cn);
     }
     else{
-      token = makeToken(SB_SLASH, lineNo, colNo);
+      token = makeToken(SB_SLASH, ln, cn);
     }
     return token;
   case CHAR_EQ: 
@@ -366,6 +374,11 @@ void printToken(Token *token) {
   case SB_RPAR: printf("SB_RPAR\n"); break;
   case SB_LSEL: printf("SB_LSEL\n"); break;
   case SB_RSEL: printf("SB_RSEL\n"); break;
+  case SB_MODULO: printf("SB_MODULO\n"); break;
+  case SB_ASSIGN_DIVIDE: printf("SB_ASSIGN_DIVIDE\n"); break;
+  case SB_ASSIGN_TIME: printf("SB_ASSIGN_TIME\n"); break;
+  case SB_ASSIGN_SUBTRACT: printf("SB_ASSIGN_SUBTRACT\n"); break;
+  case SB_ASSIGN_PLUS: printf("SB_ASSIGN_PLUS\n"); break;
   }
 }
 
