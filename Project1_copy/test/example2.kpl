@@ -1,6 +1,7 @@
 Program Example2HavingERRIDENTTOOLONG; (* Factorial *)
 !
 Var n : Integer;
+    f : FLOAT
 
 Function F(n : Integer) : Integer;
   Begin
@@ -8,6 +9,7 @@ Function F(n : Integer) : Integer;
   End;
 
 Begin
+  f := 3.140 + 002.5000;
   n += 2;
   n -= 2;
   n *= 2;
