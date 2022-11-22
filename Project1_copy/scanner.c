@@ -234,7 +234,6 @@ Token* readConstantString(){
     i++;
   }
   string[i] = '\0';
-
   if(i > MAX_STRING_LEN){
     error(ERR_STRINGTOOLONG, ln, cn);
     return token;
