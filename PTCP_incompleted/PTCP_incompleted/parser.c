@@ -156,12 +156,12 @@ void compileFuncDecl(void) {
 void compileProcDecl(void) {
   assert("Parsing a procedure ....");
   // TODO
-  seat(KW_PROCEDURE);
+  eat(KW_PROCEDURE);
   eat(TK_IDENT);
   compileParams();
   eat(SB_SEMICOLON);
   compileBlock();
-  seat(SB_SEMICOLON);
+  eat(SB_SEMICOLON);
   assert("Procedure parsed ....");
 }
 
@@ -461,11 +461,11 @@ void compileCondition2(void) {
   switch (lookAhead->tokenType) {
     case SB_EQ:
       eat(SB_EQ);
-      compilerExpression();
+      compileExpression();
       break;
     case SB_NEQ:
       eat(SB_NEQ);
-      compilerExpression();
+      compileExpression();
       break;
     case SB_LE:
       eat(SB_LE);
@@ -517,6 +517,45 @@ void compileExpression2(void) {
 
 void compileExpression3(void) {
   // TODO
+  switch(lookAhead->tokenType) {
+        case SB_PLUS:
+            eat(SB_PLUS);
+            compileTerm();
+            compileExpression3();
+            break;
+        case SB_MINUS:
+            eat(SB_MINUS);
+            compileTerm();
+            compileExpression3();
+            break;
+            // Follow (statement)
+        case SB_SEMICOLON:
+        case KW_END:
+        case KW_ELSE:
+            // Follow (For statement)
+        case KW_TO:
+        case KW_DO:
+            // Follow (arguments2)
+        case SB_COMMA:
+            // Follow (condition2)
+        case SB_EQ:
+        case SB_NEQ:
+        case SB_LE:
+        case SB_LT:
+        case SB_GE:
+        case SB_GT:
+            // Follow (factor)
+        case SB_RPAR:
+            // Follow (indexes)
+        case SB_RSEL:
+            // Follow (if statement)
+        case KW_THEN:
+            break;
+            // Error
+        default:
+            error(ERR_INVALIDEXPRESSION, lookAhead->lineNo, lookAhead->colNo);
+            break;
+    }
 }
 
 void compileTerm(void) {
@@ -527,15 +566,88 @@ void compileTerm(void) {
 
 void compileTerm2(void) {
   // TODO
+  switch (lookAhead->tokenType) {
+        case SB_TIMES:
+            eat(SB_TIMES);
+            compileFactor();
+            compileTerm2();
+            break;
+        case SB_SLASH:
+            eat(SB_SLASH);
+            compileFactor();
+            compileTerm2();
+            break;
+            // Follow - same as expression3
+        case SB_PLUS:
+        case SB_MINUS:
+            // Follow (statement)
+        case SB_SEMICOLON:
+        case KW_END:
+        case KW_ELSE:
+            // Follow (For statement)
+        case KW_TO:
+        case KW_DO:
+            // Follow (arguments2)
+        case SB_COMMA:
+            // Follow (condition2)
+        case SB_EQ:
+        case SB_NEQ:
+        case SB_LE:
+        case SB_LT:
+        case SB_GE:
+        case SB_GT:
+            // Follow (factor)
+        case SB_RPAR:
+            // Follow (indexes)
+        case SB_RSEL:
+            // Follow (if statement)
+        case KW_THEN:
+            break;
+        default:
+            error(ERR_INVALIDTERM, lookAhead->lineNo, lookAhead->colNo);
+            break;
+    }
 }
 
 void compileFactor(void) {
   // TODO
-    
+    switch (lookAhead->tokenType) {
+        case TK_NUMBER:
+        case TK_CHAR:
+            compileUnsignedConstant();
+            break;
+        case SB_LPAR:
+            eat(SB_LPAR);
+            compileExpression();
+            eat(SB_RPAR);
+            break;
+        case TK_IDENT:
+            eat(TK_IDENT);
+            switch(lookAhead->tokenType) {
+                case SB_LSEL:
+                    compileIndexes();
+                    break;
+                case SB_LPAR:
+                    compileArguments();
+                    break;
+                default:
+                    break;
+            }
+            break;
+        default:
+            error(ERR_INVALIDFACTOR, lookAhead->lineNo, lookAhead->colNo);
+            break;
+    }
 }
 
 void compileIndexes(void) {
   // TODO
+  if (lookAhead->tokenType == SB_LSEL) {
+        eat(SB_LSEL);
+        compileExpression();
+        eat(SB_RSEL);
+        compileIndexes();
+    }
 }
 
 int compile(char *fileName) {
