@@ -1,0 +1,18 @@
+PROGRAM Exercise1;
+VAR
+    a : INTEGER;
+    b : INTEGER;
+    res : INTEGER;
+Begin
+    a := READI;
+    b := READI;
+    IF a = b THEN
+        BEGIN
+            res := 0;
+            IF a > b THEN
+                res := a - b
+            ELSE
+                res := b - a
+        END;
+    CALL WRITEI(res);
+End.

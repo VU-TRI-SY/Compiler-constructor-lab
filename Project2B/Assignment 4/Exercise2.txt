@@ -1,0 +1,26 @@
+PROGRAM Exercis2;
+VAR 
+    x : INTEGER;
+    y : INTEGER;
+    z : INTEGER;
+    count : INTEGER;
+Begin
+    x := READI;
+    y := READI;
+    z := READI;
+    count := 0;
+    IF x > 20 THEN
+        IF x < 100 THEN
+            count := count + 1
+    
+    IF y > 20 THEN
+        IF y < 100 THEN
+            count := count + 1
+    
+    IF z > 20 THEN
+        IF z < 100 THEN
+            count := count + 1
+
+    CALL WRITEI(count);
+    
+End.
