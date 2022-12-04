@@ -11,6 +11,6 @@ Begin
   For n := 1 To 7 Do
     Begin
     WriteLn(' ');
-    WriteI(F(i));
+    WriteI(F(i), Var));
     End;
 End. (* Factorial *)
