@@ -448,6 +448,10 @@ void compileArguments(void) {
 
 void compileArguments2(void) {
   // TODO
+  eat(SB_LPAR);
+  compileExpression();
+  compileArguments2();
+  eat(SB_RPAR);
 }
 
 void compileCondition(void) {

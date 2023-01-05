@@ -350,7 +350,7 @@ void compileStatement(void) {
     eat1(TK_IDENT);
     if(lookAhead->tokenType == SB_ASSIGN){
       assert("Parsing an assign statement ....");
-      printToken(currentToken);
+      printToken(currentToken); //TK_IDENT
       if (lookAhead->tokenType == SB_LSEL) {
         compileIndexes();
       }
@@ -376,7 +376,7 @@ void compileStatement(void) {
   case KW_FOR:
     compileForSt();
     break;
-    // EmptySt needs to check FOLLOW tokens
+    // FOLLOW tokens
   case SB_SEMICOLON:
   case KW_END:
   case KW_ELSE:
@@ -558,7 +558,6 @@ void compileExpression2(void) {
   compileTerm();
   compileExpression3();
 }
-
 
 void compileExpression3(void) {
   // TODO

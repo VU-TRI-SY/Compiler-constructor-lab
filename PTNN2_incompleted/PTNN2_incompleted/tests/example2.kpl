@@ -1,5 +1,5 @@
 Program Example2; (* Factorial *)
-CONST MAX = 1;
+   
 Var n : Integer;
 
 Function F(n : Integer) : Integer;
@@ -10,7 +10,7 @@ Function F(n : Integer) : Integer;
 Begin
   For n := 1 To 7 Do
     Begin
-    WriteLn(' ');
-    WriteI(F(i));
+      Call WriteLn;
+      Call WriteI( F(n));
     End;
 End. (* Factorial *)
