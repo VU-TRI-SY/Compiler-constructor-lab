@@ -1,9 +1,8 @@
 Program Example5; (* Example 5 *)
 const c = 1;
-type t = char;
+type t = char;a = ARRAY(.5.) of t;
 function f(i : integer):char;
 const b = 5;
-type a = ARRAY(.5.) of t;
 begin
 end;
 Begin
