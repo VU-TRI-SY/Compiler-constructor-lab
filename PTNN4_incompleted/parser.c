@@ -60,7 +60,7 @@ void compileBlock(void) {
     do {
       eat(TK_IDENT);
 
-      checkFreshIdent(currentToken->string);
+      checkFreshIdent(currentToken->string); //check khai bao truoc do hay chua
       constObj = createConstantObject(currentToken->string);
 
       eat(SB_EQ);
@@ -501,6 +501,7 @@ void compileArgument(Object* param) {
   // TODO: parse an argument, and check type consistency
   //       If the corresponding parameter is a reference, the argument must be a lvalue
   if (param->paramAttrs->kind == PARAM_REFERENCE) {
+    // printf("Reference: %s %d\n", lookAhead->string, lookAhead->tokenType);
     if (lookAhead->tokenType == TK_IDENT) {
         checkDeclaredLValueIdent(lookAhead->string);
     }
@@ -634,7 +635,6 @@ Type* compileExpression2(void) {
 
   return type;
 }
-
 
 void compileExpression3(void) {
   Type* type;

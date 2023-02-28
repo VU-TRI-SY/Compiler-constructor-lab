@@ -1,6 +1,7 @@
 Program Example6;
    Const c1 = 10;
-  	 c2 = 'a';
+  	c2 = 'a';
+    c3 = -c2;
    Type t1 = array(. 10 .) of integer;
    Var v1 : Integer;
        v2 : Array(. 10 .) of t1;
@@ -19,7 +20,7 @@ Program Example6;
          v3 : char;
      begin
 	v3 := 'a';
-        v1 := f(c3,v3);
+        v1 := f(c3, v3);
      end;
 
 Begin

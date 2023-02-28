@@ -52,13 +52,13 @@ void error(ErrorCode err, int lineNo, int colNo) {
   for (i = 0 ; i < NUM_OF_ERRORS; i ++) 
     if (errors[i].errorCode == err) {
       printf("%d-%d:%s\n", lineNo, colNo, errors[i].message);
-      // exit(0);
+      exit(0);
     }
 }
 
 void missingToken(TokenType tokenType, int lineNo, int colNo) {
   printf("%d-%d:Missing %s\n", lineNo, colNo, tokenToString(tokenType));
-  // exit(0);
+  exit(0);
 }
 
 void assert(char *msg) {
